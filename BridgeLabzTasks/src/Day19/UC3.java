@@ -10,7 +10,7 @@ public class UC3 {
 		Scanner sc=new Scanner(System.in);
 		System.out.println("Enter the Email");
 		String email=sc.next();
-		String pattern="^[a-z]+([\\.a-z]+)?@[a-z]+\\.[a-z]+([\\.a-z]{3}+)?$";
+		String pattern="^[a-z0-9\\+]+([\\.\\-a-z0-9]+)?@[a-z0-9]+\\.[a-z]+([\\.a-z]{4}+)?$";
 		Pattern p=Pattern.compile(pattern);
 		Matcher m=p.matcher(email);
 		
