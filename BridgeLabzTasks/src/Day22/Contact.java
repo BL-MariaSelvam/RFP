@@ -1,5 +1,7 @@
 package Day22;
 
+import java.util.Objects;
+
 public class Contact {
 	
 	private String firstName;
@@ -69,6 +71,21 @@ public class Contact {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(firstName.toLowerCase(), lastName.toLowerCase());
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Contact other = (Contact) obj;
+		return firstName.equalsIgnoreCase(other.firstName) && lastName.equalsIgnoreCase(other.lastName);
 	}
 	
 	
