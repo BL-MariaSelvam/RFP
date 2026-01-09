@@ -9,6 +9,9 @@ public class AddressBook {
 	
 	private List<Contact> contacts=new ArrayList<>();
 	
+	public List<Contact> getContacts() {
+		return contacts;
+	}
 	public void addContact(Contact contact) {
 		contacts.add(contact);
 		System.out.println("Contact Details added");
@@ -73,5 +76,8 @@ public class AddressBook {
 			System.out.println("Record not found");
 		
 	}
+	
+	
+	
 		
 	}
