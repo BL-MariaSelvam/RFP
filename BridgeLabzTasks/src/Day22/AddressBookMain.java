@@ -1,8 +1,10 @@
 package Day22;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class AddressBookMain {
 	
@@ -45,7 +47,7 @@ public class AddressBookMain {
 					System.out.println("No addressBook found with this name");
 				}
 				else 
-					addressBookMenu(sc,selectedBookName);
+					addressBookMenu(sc,selectedBookName,addressBookMap);
 				break;
 			case 3:
 				System.out.println("Exit NOw");
@@ -58,7 +60,7 @@ public class AddressBookMain {
 		}while(true);
 	}
 		
-		private static void addressBookMenu(Scanner sc,AddressBook addressBook) {
+		private static void addressBookMenu(Scanner sc,AddressBook addressBook, Map<String, AddressBook> addressBookMap) {
 		
 		do {
 			System.out.println("Address Book Menu");
@@ -66,7 +68,8 @@ public class AddressBookMain {
 			System.out.println("2.View Contact");
 			System.out.println("3.Edit contact");
 			System.out.println("4.Delete Contact");
-			System.out.println("5.Exit");
+			System.out.println("5.Search Contact based City");
+			System.out.println("6.Exit");
 			System.out.println("Enter the option from Menu");
 			int option=sc.nextInt();
 			
@@ -125,7 +128,42 @@ public class AddressBookMain {
 				String firName=sc.next();
 				addressBook.deleteContact(firName);
 				break;
+			
 			case 5:
+			    sc.nextLine(); // consume leftover newline
+
+			    System.out.print("Enter City or State to search for: ");
+			    String query = sc.nextLine();
+
+			    List<SearchResult> results = addressBookMap.entrySet().stream()
+			        .flatMap(entry ->
+			            entry.getValue().getContacts().stream()
+			                .filter(cont ->
+			                    cont.getCity().equalsIgnoreCase(query)
+			                    || cont.getState().equalsIgnoreCase(query)
+			                )
+			                .map(cont ->
+			                    new SearchResult(entry.getKey(), cont)
+			                )
+			        )
+			        .collect(Collectors.toList());
+
+			    if (results.isEmpty()) {
+			        System.out.println("No contacts found in that city/state.");
+			    } else {
+			        System.out.println("Search Results:");
+			        results.forEach(result -> {
+			            Contact c = result.getContact();
+			            System.out.println(
+			                "AddressBook: " + result.getAddressBookName()
+			                + " | " + c.getFirstName() + " " + c.getLastName()
+			                + " | City: " + c.getCity()
+			                + " | State: " + c.getState()
+			            );
+			        });
+			    }
+			    break;
+			case 6:
 				System.out.println("Returning to home");
 				return;
 			default:
@@ -136,5 +174,6 @@ public class AddressBookMain {
 			
 		}while(true);
 		}
+
 
 }

@@ -9,6 +9,9 @@ public class AddressBook {
 	
 	private List<Contact> contacts=new ArrayList<>();
 	
+	public List<Contact> getContacts() {
+		return contacts;
+	}
 	public void addContact(Contact contact) {
 		
 		boolean duplicates=contacts.stream().anyMatch(existing->existing.equals(contact));
@@ -82,5 +85,8 @@ public class AddressBook {
 			System.out.println("Record not found");
 		
 	}
+	
+	
+	
 		
 	}
