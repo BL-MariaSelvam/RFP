@@ -13,8 +13,17 @@ public class AddressBook {
 		return contacts;
 	}
 	public void addContact(Contact contact) {
-		contacts.add(contact);
-		System.out.println("Contact Details added");
+		
+		boolean duplicates=contacts.stream().anyMatch(existing->existing.equals(contact));
+		if(duplicates) {
+			System.out.println("Duplicate Entry not allowed");
+		}
+			
+		else{
+			contacts.add(contact);
+			System.out.println("Contact Details added");
+		}
+		
 	}
 	
 	public void displayContacts() {
