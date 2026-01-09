@@ -69,7 +69,11 @@ public class AddressBookMain {
 			System.out.println("3.Edit contact");
 			System.out.println("4.Delete Contact");
 			System.out.println("5.Search Contact based City");
-			System.out.println("6.Exit");
+			System.out.println("6.View Persons by City");
+			System.out.println("7.View Persons by State");
+			System.out.println("8.Count Persons by City");
+			System.out.println("9.Count Persons by State");
+			System.out.println("10.Exit");
 			System.out.println("Enter the option from Menu");
 			int option=sc.nextInt();
 			
@@ -164,6 +168,64 @@ public class AddressBookMain {
 			    }
 			    break;
 			case 6:
+			    Map<String, List<Contact>> personsByCity =
+			        addressBookMap.values().stream()
+			            .flatMap(book -> book.getContacts().stream())
+			            .collect(Collectors.groupingBy(Contact::getCity));
+
+			    personsByCity.forEach((c, persons) -> {
+			        System.out.println("City: " + c);
+			        persons.forEach(p ->
+			            System.out.println(p.getFirstName() + " " + p.getLastName())
+			        );
+			        System.out.println();
+			    });
+			    break;
+			case 7:
+			    Map<String, List<Contact>> personsByState =
+			        addressBookMap.values().stream()
+			            .flatMap(book -> book.getContacts().stream())
+			            .collect(Collectors.groupingBy(Contact::getState));
+
+			    personsByState.forEach((s, persons) -> {
+			        System.out.println("State: " + s);
+			        persons.forEach(p ->
+			            System.out.println(p.getFirstName() + " " + p.getLastName())
+			        );
+			        System.out.println();
+			    });
+			    break;
+			case 8:
+			    Map<String, Long> countByCity =
+			        addressBookMap.values().stream()
+			            .flatMap(book -> book.getContacts().stream())
+			            .collect(Collectors.groupingBy(
+			                Contact::getCity,
+			                Collectors.counting()
+			            ));
+
+			    System.out.println("Person Count by City:");
+			    countByCity.forEach((ci, count) ->
+			        System.out.println(ci + " -> " + count)
+			    );
+			    break;
+			case 9:
+			    Map<String, Long> countByState =
+			        addressBookMap.values().stream()
+			            .flatMap(book -> book.getContacts().stream())
+			            .collect(Collectors.groupingBy(
+			                Contact::getState,
+			                Collectors.counting()
+			            ));
+
+			    System.out.println("Person Count by State:");
+			    countByState.forEach((stat, count) ->
+			        System.out.println(stat + " -> " + count)
+			    );
+			    break;
+
+
+			case 10:
 				System.out.println("Returning to home");
 				return;
 			default:
