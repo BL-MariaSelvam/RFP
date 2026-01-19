@@ -9,6 +9,9 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="C:/Users/sathi/Downloads/gson-2.10.jar"/>
 	<classpathentry kind="lib" path="C:/Users/sathi/Downloads/opencsv-5.9.jar"/>
-	<classpathentry kind="lib" path="C:/Users/sathi/Downloads/commons-collections4-4.5.0-src.zip"/>
+	<classpathentry kind="lib" path="C:/Users/sathi/Downloads/commons-collections4-4.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/sathi/Downloads/commons-lang3-3.18.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/sathi/Downloads/commons-beanutils-1.9.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/sathi/Downloads/commons-logging-1.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
