@@ -77,7 +77,9 @@ public class AddressBookMain {
 			System.out.println("11.View Contacts Sorted by City");
 			System.out.println("12.View Contacts Sorted by State");
 			System.out.println("13.View Contacts Sorted by ZipCode");
-			System.out.println("14.Exit");
+			System.out.println("14.Save AddressBook to File");
+			System.out.println("15.Load AddressBook from File");
+			System.out.println("16.Exit");
 			System.out.println("Enter the option from Menu");
 			int option=sc.nextInt();
 			
@@ -240,7 +242,18 @@ public class AddressBookMain {
 			case 13:
 			    addressBook.displayContactsSortedByZipCode();
 			    break;
+			    
 			case 14:
+			    AddressBookFileIOService.writeAddressBook("MyAddressBook", addressBook);
+			    break;
+
+			case 15:
+			    AddressBook loadedBook =
+			            AddressBookFileIOService.readAddressBook("MyAddressBook");
+			    addressBook.getContacts().clear();
+			    addressBook.getContacts().addAll(loadedBook.getContacts());
+			    break;
+			case 16:
 				System.out.println("Returning to home");
 				return;
 			default:

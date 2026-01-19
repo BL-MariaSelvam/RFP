@@ -102,5 +102,14 @@ public class Contact {
 	            ", Email='" + email + '\'' +
 	            '}';
 	}
+	
+	public static Contact fromString(String line) {
+	    String[] data = line.split(",");
+	    return new Contact(
+	            data[0], data[1], data[2],
+	            data[3], data[4], data[5],
+	            data[6], data[7]
+	    );
+	}
 
 }
